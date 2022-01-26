@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ModuleSelectionController">
+    <top>
+        <MenuBar prefWidth="650.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+            <Menu text="File">
+                <MenuItem fx:id="loadItem" accelerator="SHORTCUT+L" text="_Load Student Data" />
+                <MenuItem fx:id="saveItem" accelerator="SHORTCUT+S" text="_Save Student Data" />
+                <SeparatorMenuItem />
+                <MenuItem fx:id="exitItem" accelerator="SHORTCUT+X" text="E_xit" />
+            </Menu>
+            <Menu text="Help">
+                <MenuItem fx:id="aboutItem" accelerator="SHORTCUT+A" text="About" />
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabPane" prefHeight="575.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0" GridPane.rowIndex="1">
+
+            <!--            Create Profile tab          -->
+            <Tab text="Create Profile">
+                <GridPane alignment="CENTER" hgap="20" vgap="15">
+                    <Label text="Select course: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="cboCourses" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label text="Input P number: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="txtPnumber" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Label text="Input first name: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="txtFirstName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Label text="Input surname: " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="txtSurname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <Label text="Input email: " GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                    <Label text="Input date: " GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <DatePicker fx:id="inputDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                    <Button fx:id="btnCreateProfile" text="Create Profile" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
+            </Tab>
+
+            <!--            Select Modules tab          -->
+            <Tab text="Select Modules">
+                <GridPane alignment="CENTER" hgap="15.0">
+                    <VBox prefHeight="410.0" prefWidth="300.0" GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0" GridPane.vgrow="SOMETIMES">
+                        <Label text="Unselected Term 1 modules">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="unselectedTerm1" prefHeight="110.0" prefWidth="300.0" />
+                        <HBox alignment="CENTER" spacing="10.0">
+                            <Label text="Term 1" />
+                            <Button onAction="#addModule1" text="Add" />
+                            <Button onAction="#removeModule1" text="Remove" />
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </HBox>
+
+                        <Label alignment="BOTTOM_LEFT" text="Unselected Term 2 modules">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="unselectedTerm2" prefHeight="110.0" prefWidth="300.0" />
+                        <HBox alignment="CENTER" spacing="10.0">
+                            <Label text="Term 2" />
+                            <Button onAction="#addModule2" text="Add" />
+                            <Button onAction="#removeModule2" text="Remove" />
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </HBox>
+
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                            <padding>
+                                <Insets right="20.0" />
+                            </padding>
+                            <Label text="Current term 1 credits:">
+                                <font>
+                                    <Font name="System Bold" size="12.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="term1CreditField" editable="false" prefHeight="25.0" prefWidth="40.0" />
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </HBox>
+                    </VBox>
+
+                    <VBox prefHeight="410.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0" GridPane.vgrow="SOMETIMES">
+                        <Label text="Selected Year Long modules">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="selectedYearLong" prefHeight="40.0" prefWidth="307.0" VBox.vgrow="NEVER" />
+
+                        <Label text="Selected Term 1 modules">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="selectedTerm1" prefHeight="120.0" prefWidth="300.0" />
+
+                        <Label text="Selected Term 2 modules">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="selectedTerm2" prefHeight="110.0" prefWidth="300.0" />
+
+                        <HBox alignment="CENTER_LEFT" spacing="15.0">
+                            <Label text="Current term 2 credits:">
+                                <font>
+                                    <Font name="System Bold" size="12.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="term2CreditField" editable="false" prefHeight="25.0" prefWidth="40.0" />
+                            <padding>
+                                <Insets left="25.0" />
+                            </padding>
+                            <VBox.margin>
+                                <Insets top="25.0" />
+                            </VBox.margin>
+                        </HBox>
+                    </VBox>
+                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="615.0" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                        <Button fx:id="resetBtn" onAction="#resetView" text="Reset" />
+                        <Button onAction="#submitUnselected" text="Submit" />
+                        <GridPane.margin>
+                            <Insets top="25.0" />
+                        </GridPane.margin>
+                    </HBox>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="405.0" minHeight="392.0" prefHeight="405.0" />
+                        <RowConstraints maxHeight="43.0" minHeight="30.0" prefHeight="30.0" />
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                    </rowConstraints>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </GridPane>
+            </Tab>
+
+            <!--            Reserve Modules tab          -->
+            <Tab text="Reserve Modules">
+                <GridPane alignment="CENTER">
+                    <Accordion fx:id="accordion" GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0" GridPane.vgrow="SOMETIMES">
+                        <panes>
+                            <TitledPane fx:id="t1" prefHeight="599.0" prefWidth="490.0" text="Term 1 Modules">
+                                <GridPane alignment="CENTER" hgap="20.0" prefWidth="608.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="326.0" minHeight="10.0" prefHeight="326.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <Label alignment="BOTTOM_LEFT" text="Unselected Term 1 modules">
+                                        <GridPane.margin>
+                                            <Insets />
+                                        </GridPane.margin>
+                                        <font>
+                                            <Font name="System Bold" size="12.0" />
+                                        </font>
+                                    </Label>
+                                    <ListView fx:id="unselectedTerm1Modules" prefHeight="274.0" prefWidth="265.0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
+                                    <ListView fx:id="reservedTerm1Modules" prefHeight="274.0" prefWidth="265.0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
+                                    <HBox alignment="CENTER" prefHeight="25.0" prefWidth="460.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                        <Label prefHeight="17.0" prefWidth="251.0" text="Reserve 30 credits worth of term 1 modules">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="addButton1" disable="true" onAction="#addToReservedModule1" text="Add" />
+                                        <Button fx:id="removeButton1" disable="true" onAction="#removeFromReservedModule1" text="Remove" />
+                                        <Button fx:id="confirmButton1" disable="true" onAction="#confirmModule1" text="Confirm" />
+                                        <padding>
+                                            <Insets top="15.0" />
+                                        </padding>
+                                    </HBox>
+
+                                    <Label text="Reserved Term 1 modules" GridPane.columnIndex="1">
+                                        <GridPane.margin>
+                                            <Insets />
+                                        </GridPane.margin>
+                                        <font>
+                                            <Font name="System Bold" size="12.0" />
+                                        </font>
+                                    </Label>
+                                    <padding>
+                                        <Insets left="10.0" right="10.0" />
+                                    </padding>
+                                </GridPane>
+                            </TitledPane>
+
+                            <TitledPane fx:id="t2" disable="true" prefHeight="599.0" prefWidth="490.0" text="Term 2 Modules">
+                                <GridPane alignment="CENTER" hgap="20.0" prefWidth="608.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="326.0" minHeight="10.0" prefHeight="326.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <Label alignment="BOTTOM_LEFT" text="Unselected Term 2 modules">
+                                        <GridPane.margin>
+                                            <Insets />
+                                        </GridPane.margin>
+                                        <font>
+                                            <Font name="System Bold" size="12.0" />
+                                        </font>
+                                    </Label>
+                                    <ListView fx:id="unselectedTerm2Modules" prefHeight="274.0" prefWidth="265.0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
+                                    <ListView fx:id="reservedTerm2Modules" prefHeight="274.0" prefWidth="265.0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
+                                    <HBox alignment="CENTER" prefHeight="25.0" prefWidth="460.0" spacing="15.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                        <Label prefHeight="17.0" prefWidth="248.0" text="Reserve 30 credits worth of term 1 modules">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="addButton2" disable="true" onAction="#addToReservedModule2" text="Add" />
+                                        <Button fx:id="removeButton2" disable="true" onAction="#removeFromReservedModule2" text="Remove" />
+                                        <Button fx:id="confirmButton2" disable="true" text="Confirm" />
+                                        <padding>
+                                            <Insets top="15.0" />
+                                        </padding>
+                                    </HBox>
+
+                                    <Label text="Reserved Term 2 modules" GridPane.columnIndex="1">
+                                        <GridPane.margin>
+                                            <Insets />
+                                        </GridPane.margin>
+                                        <font>
+                                            <Font name="System Bold" size="12.0" />
+                                        </font>
+                                    </Label>
+                                    <padding>
+                                        <Insets left="10.0" right="10.0" />
+                                    </padding>
+                                </GridPane>
+                            </TitledPane>
+                        </panes>
+                    </Accordion>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                    </rowConstraints>
+                    <padding>
+                        <Insets bottom="30.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </GridPane>
+            </Tab>
+
+            <!--            Overview Selection tab          -->
+            <Tab text="Overview Selection">
+                <GridPane alignment="CENTER" hgap="20.0" prefHeight="435.0" prefWidth="597.0" vgap="25.0">
+                    <TextArea fx:id="profileDisplay" prefHeight="130.0" prefWidth="520.0" promptText="Profile will appear here" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+
+                    <TextArea fx:id="selectedModulesDisplay" prefHeight="250.0" prefWidth="300.0" promptText="Selected modules will appear here" wrapText="true" GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets />
+                        </GridPane.margin>
+                    </TextArea>
+
+                    <TextArea fx:id="reservedModulesDisplay" prefHeight="250.0" prefWidth="300.0" promptText="Reserved Modules will appear here" wrapText="true" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets />
+                        </GridPane.margin>
+                    </TextArea>
+                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="620.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                        <Button alignment="CENTER" text="Save Overview" />
+                    </HBox>
+                    <padding>
+                        <Insets left="25.0" right="25.0" top="20.0" />
+                    </padding>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
